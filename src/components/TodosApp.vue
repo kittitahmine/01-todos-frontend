@@ -18,12 +18,21 @@
 import NewTodoInput from '@/components/NewTodoInput'
 import Todos from '@/components/Todos'
 import TodosFooter from '@/components/TodosFooter'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
     NewTodoInput,
     Todos,
     TodosFooter
+  },
+  methods: {
+    ...mapActions(['getTodos'])
+  },
+  created () {
+    if (JSON.parse(localStorage.getItem('todos'))) {
+      this.getTodos(JSON.parse(localStorage.getItem('todos')))
+    }
   }
 }
 </script>
